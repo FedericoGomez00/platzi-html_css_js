@@ -74,7 +74,8 @@ function toggleOrderList() {
 
 function openProductDetail(event) {
     /**
-     * 
+     * Muestra la descripción del producto que se cleckeó
+     * Por el momento los datos estás hardcodeados
      */
     if (!desktop_menu.classList.contains('inactive')) {
         toggleDesktopMenu();
@@ -92,7 +93,7 @@ function openProductDetail(event) {
 
 function closeProductDetail() {
     /**
-     * 
+     * Cierra la vista de detalle del producto al darle click al icono close (x)
      */
 
     product_detail.classList.add('inactive');
@@ -168,21 +169,9 @@ function renderProducts() {
 }
 
 function renderProductDetail(product) {
-    // <aside class="product-detail inactive">
-    //     <div class="product-detail-close">
-    //         <img src="./original-components/icons/icon_close.png" alt="close">
-    //     </div>
-    //     <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
-    //     <div class="product-detail__product-info">
-    //         <p>$35,00</p>
-    //         <p>Bike</p>
-    //         <p>With its practical position, this bike also fulfills a decorative function, add your hall or workspace.</p>
-    //         <button class="primary-button add-to-cart-button">
-    //             <img src="./original-components/icons/bt_add_to_cart.svg" alt="add to cart">
-    //             Add to cart
-    //         </button>
-    //     </div>
-    // </aside>
+    /**
+     * Renderiza los datos de un producto para mostrar la vista de detalle
+     */
 
     const product_detail = document.createElement('aside');
     product_detail.classList.add('product-detail');
