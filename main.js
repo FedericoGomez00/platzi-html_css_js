@@ -8,16 +8,17 @@ const shopping_icon = document.querySelector('.navbar-shopping-cart');
 const order_list = document.querySelector('.shopping-cart-container');
 
 const cards_container = document.querySelector('.cards-container');
-const product_container = document.querySelector('.product-card');
-const product_detail = document.querySelector('.product-detail');
 
-setProductsHtml();
+const product_detail = document.querySelector('.product-detail');
+const close_product_detail = document.querySelector('.product-detail-close');
+
+renderProducts();
 
 navbar_email.addEventListener('click', toggleDesktopMenu);
 icon_menu.addEventListener('click', toggleMobileMenu);
 shopping_icon.addEventListener('click', toggleOrderList);
-console.log(product_container);
-product_container.addEventListener('click', toggleProductDetail);
+
+close_product_detail.addEventListener('click', closeProductDetail);
 
 
 function toggleDesktopMenu() {
@@ -28,6 +29,9 @@ function toggleDesktopMenu() {
 
     if (!order_list.classList.contains('inactive')) {
         toggleOrderList();
+    }
+    if (!product_detail.classList.contains('inactive')) {
+        closeProductDetail();
     }
 
     desktop_menu.classList.toggle('inactive');
@@ -41,6 +45,9 @@ function toggleMobileMenu() {
 
     if (!order_list.classList.contains('inactive')) {
         toggleOrderList();
+    }
+    if (!product_detail.classList.contains('inactive')) {
+        closeProductDetail();
     }
 
     mobile_menu.classList.toggle('inactive');
@@ -58,11 +65,14 @@ function toggleOrderList() {
     if (!mobile_menu.classList.contains('inactive')) {
         toggleMobileMenu();
     }
+    if (!product_detail.classList.contains('inactive')) {
+        closeProductDetail();
+    }
 
     order_list.classList.toggle('inactive');
 }
 
-function toggleProductDetail() {
+function openProductDetail(event) {
     /**
      * 
      */
@@ -75,11 +85,20 @@ function toggleProductDetail() {
     if (!order_list.classList.contains('inactive')) {
         toggleOrderList();
     }
-
-    product_detail.classList.toggle('inactive');
+    console.log(event);
+    // renderProductDetail();
+    product_detail.classList.remove('inactive');
 }
 
-function setProductsHtml() {
+function closeProductDetail() {
+    /**
+     * 
+     */
+
+    product_detail.classList.add('inactive');
+}
+
+function renderProducts() {
     /**
      * Agrega los productos a partir de un array (harcodeado hasta el momento) al HTML
      * La función recorre el array de productos y los maqueta para renderizarlos.
@@ -88,7 +107,7 @@ function setProductsHtml() {
     let productList = [];
 
     let i = 1;
-    while(i <= 10) {
+    while(i <= 5) {
         productList.push(
             {
                 name: 'Bike',
@@ -98,11 +117,24 @@ function setProductsHtml() {
         )
         i++;
     }
+    let n = 1;
+    while(n <= 5) {
+        productList.push(
+            {
+                name: 'Laptop',
+                price: 970,
+                image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+            }
+        )
+        n++;
+    }
+
     console.log(productList);
 
     for (product of productList) {
         const product_card = document.createElement('div');
         product_card.classList.add('product-card');
+        product_card.addEventListener('click', openProductDetail);
 
             const product_img = document.createElement('img');
             product_img.setAttribute('src', product.image);
@@ -133,4 +165,66 @@ function setProductsHtml() {
 
         cards_container.appendChild(product_card);
     }
+}
+
+function renderProductDetail(product) {
+    // <aside class="product-detail inactive">
+    //     <div class="product-detail-close">
+    //         <img src="./original-components/icons/icon_close.png" alt="close">
+    //     </div>
+    //     <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
+    //     <div class="product-detail__product-info">
+    //         <p>$35,00</p>
+    //         <p>Bike</p>
+    //         <p>With its practical position, this bike also fulfills a decorative function, add your hall or workspace.</p>
+    //         <button class="primary-button add-to-cart-button">
+    //             <img src="./original-components/icons/bt_add_to_cart.svg" alt="add to cart">
+    //             Add to cart
+    //         </button>
+    //     </div>
+    // </aside>
+
+    const product_detail = document.createElement('aside');
+    product_detail.classList.add('product-detail');
+
+        const product_detail_close = document.createElement('div');
+        product_detail_close.classList.add('product-detail-close');
+
+            const close_icon = document.createElement('img');
+            close_icon.setAttribute('src', './original-components/icons/icon_close.png');
+        
+        const product_img = document.createElement('img');
+        product_img.setAttribute('src', product.image);
+
+        const product_info = document.createElement('div');
+        product_info.classList.add('product-detail__product-info');
+
+            const product_price = document.createElement('p');
+            product_price.innerText = product.price;
+
+            const product_name = document.createElement('p');
+            product_name.innerText = product.name;
+
+            const product_description = document.createElement('p');
+            product_description.innerText = product.description;
+
+            const add_to_cart_button = document.createElement('button');
+            add_to_cart_button.classList.add('primary-button add-to-cart-button');
+
+                const add_to_cart_icon = document.createElement('img');
+                add_to_cart_icon.setAttribute('src', './original-components/icons/bt_add_to_cart.svg');
+                add_to_cart_button.innerText = 'Add to cart';
+    
+    add_to_cart_button.appendChild(add_to_cart_icon);
+    product_info.appendChild(product_price);
+    product_info.appendChild(product_name);
+    product_info.appendChild(product_description);
+    product_info.appendChild(add_to_cart_button);
+    product_detail_close.appendChild(close_icon);
+    product_detail.appendChild(product_detail_close);
+    product_detail.appendChild(product_img);
+    product_detail.appendChild(product_info);
+
+    const main_container_asides = document.querySelector('.main-shoppingCart-productDetail');
+    main_container_asides.appendChild(product_detail);
 }
