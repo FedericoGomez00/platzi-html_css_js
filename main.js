@@ -1,3 +1,5 @@
+const darken_container = document.querySelector('.darken');
+
 const navbar_email = document.querySelector('.navbar-email');
 const desktop_menu = document.querySelector('.desktop-menu');
 
@@ -35,6 +37,8 @@ function toggleDesktopMenu() {
     }
 
     desktop_menu.classList.toggle('inactive');
+    desktop_menu.setAttribute('style', 'z-index: 2');
+    darken_container.classList.toggle('inactive');
 }
 
 function toggleMobileMenu() {
@@ -51,6 +55,8 @@ function toggleMobileMenu() {
     }
 
     mobile_menu.classList.toggle('inactive');
+    mobile_menu.setAttribute('style', 'z-index: 2');
+    darken_container.classList.toggle('inactive');
 }
 
 function toggleOrderList() {
@@ -70,6 +76,8 @@ function toggleOrderList() {
     }
 
     order_list.classList.toggle('inactive');
+    order_list.setAttribute('style', 'z-index: 2');
+    darken_container.classList.toggle('inactive');
 }
 
 function openProductDetail(event) {
