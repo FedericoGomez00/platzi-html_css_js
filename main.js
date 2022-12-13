@@ -162,7 +162,7 @@ function renderProducts() {
                 const product_info_figure = document.createElement('figure');
                 
                     const product_img_cart = document.createElement('img');
-                    product_img_cart.setAttribute('src', './original-components/icons/bt_add_to_cart.svg');
+                    product_img_cart.setAttribute('src', './img/icons/bt_add_to_cart.svg');
         
         product_card.appendChild(product_img);
         product_card.appendChild(product_info);
@@ -188,7 +188,7 @@ function renderProductDetail(product) {
         product_detail_close.classList.add('product-detail-close');
 
             const close_icon = document.createElement('img');
-            close_icon.setAttribute('src', './original-components/icons/icon_close.png');
+            close_icon.setAttribute('src', './img/icons/icon_close.png');
         
         const product_img = document.createElement('img');
         product_img.setAttribute('src', product.image);
@@ -209,7 +209,7 @@ function renderProductDetail(product) {
             add_to_cart_button.classList.add('primary-button add-to-cart-button');
 
                 const add_to_cart_icon = document.createElement('img');
-                add_to_cart_icon.setAttribute('src', './original-components/icons/bt_add_to_cart.svg');
+                add_to_cart_icon.setAttribute('src', './img/icons/bt_add_to_cart.svg');
                 add_to_cart_button.innerText = 'Add to cart';
     
     add_to_cart_button.appendChild(add_to_cart_icon);
